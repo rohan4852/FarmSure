@@ -1,45 +1,44 @@
-// home.js
-
-// Modal script
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('.close');
+    const loginModal = document.getElementById('login');
+    const signupModal = document.getElementById('signup');
+    const closeLogin = loginModal.querySelector('.close');
+    const closeSignup = signupModal.querySelector('.close');
+    const accessMarketplaceBtn = document.getElementById('accessMarketplaceBtn');
 
-    // Event listeners for opening modals
-    loginBtn.addEventListener('click', () => openModal(modals[0]));
-    signupBtn.addEventListener('click', () => openModal(modals[1]));
+    // Open Login Modal
+    loginBtn.onclick = function () {
+        loginModal.style.display = "block";
+    }
 
-    // Event listeners for closing modals
-    closeButtons.forEach(button => {
-        button.addEventListener('click', closeModals);
-    });
+    // Open Signup Modal
+    signupBtn.onclick = function () {
+        signupModal.style.display = "block";
+    }
+
+    // Close Login Modal
+    closeLogin.onclick = function () {
+        loginModal.style.display = "none";
+    }
+
+    // Close Signup Modal
+    closeSignup.onclick = function () {
+        signupModal.style.display = "none";
+    }
 
     // Close modal when clicking outside of it
-    window.addEventListener('click', (event) => {
-        modals.forEach(modal => {
-            if (event.target === modal) {
-                closeModal(modal);
-            }
-        });
-    });
-
-    // Function to open a specific modal
-    function openModal(modal) {
-        modal.style.display = "block";
+    window.onclick = function (event) {
+        if (event.target == loginModal) {
+            loginModal.style.display = "none";
+        }
+        if (event.target == signupModal) {
+            signupModal.style.display = "none";
+        }
     }
 
-    // Function to close all modals
-    function closeModals() {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            closeModal(modal);
-        });
+    // Access Marketplace Button Functionality
+    accessMarketplaceBtn.onclick = function () {
+        window.location.href = 'marketplace.html'; // Redirect to marketplace
     }
-
-    // Function to close a specific modal
-    function closeModal(modal) {
-        modal.style.display = "none";
-    }
-})
+});
