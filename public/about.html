@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmSure-About Us</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Contract Farming System</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html" id="About">About us</a></li>
+                <li><a href="marketplace.html">Marketplace</a></li>
+                <li><a href="#login" id="loginBtn">Login</a></li>
+                <li><a href="#signup" id="signupBtn">Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="About" class="container mt-5">
+            <h2 class="text-center">About the Contract Farming System</h2>
+            <hr>
+            <p>
+                Welcome to the Contract Farming System, a revolutionary platform designed to connect farmers with
+                buyers, ensuring a seamless and efficient agricultural supply chain. Our mission is to empower farmers
+                by providing them with the tools and resources they need to thrive in today's competitive market.
+            </p>
+            <h3>What is Contract Farming?</h3>
+            <p>
+                Contract farming is an agricultural production system where farmers and buyers enter into agreements
+                before the production season. This arrangement ensures that farmers have a guaranteed market for their
+                produce, while buyers can secure a reliable supply of quality products.
+            </p>
+            <h3>Key Features of Our System</h3>
+            <ul>
+                <li>
+                    <strong>Direct Connection:</strong> Our platform facilitates direct communication between farmers
+                    and buyers, eliminating intermediaries and ensuring fair pricing.
+                </li>
+                <li>
+                    <strong>Secure Contracts:</strong> Farmers can create and manage contracts with buyers, ensuring
+                    transparency and security in all transactions.
+                </li>
+                <li>
+                    <strong>Payment Management:</strong> Our integrated payment system allows for secure and timely
+                    payments, ensuring that farmers receive their dues promptly.
+                </li>
+                <li>
+                    <strong>User-Friendly Interface:</strong> The platform is designed to be intuitive and easy to
+                    navigate, making it accessible for all users, regardless of their technical expertise.
+                </li>
+                <li>
+                    <strong>Support and Resources:</strong> We provide educational resources and support for farmers to
+                    enhance their skills and knowledge in contract farming.
+                </li>
+            </ul>
+            <h3>Why Choose Us?</h3>
+            <p>
+                By choosing our Contract Farming System, you are not only investing in your agricultural business but
+                also contributing to a sustainable and efficient food supply chain. We are committed to supporting
+                farmers and buyers alike, fostering a collaborative environment that benefits everyone involved.
+            </p>
+            <p>
+                Join us today and be a part of the future of agriculture!
+            </p>
+        </section>
+
+        <section id="login" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Login</h2>
+                <form>
+                    <label for="loginEmail">Email:</label><br>
+                    <input type="email" id="loginEmail" required><br>
+                    <label for="role">Role:</label><br>
+                    <input type="text" id="role" required><br>
+                    <label for="loginPassword">Password:</label><br>
+                    <input type="password" id="loginPassword" required><br>
+                    <button type="submit">Login</button><br>
+                </form>
+            </div>
+        </section>
+
+        <section id="signup" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Signup</h2>
+                <form>
+                    <label for="signupUsername">Username:</label><br>
+                    <input type="text" id="username" required><br>
+                    <label for="signupName">Full Name:</label><br>
+                    <input type="text" id="FullName" required><br>
+                    <label for="signupEmail">Email:</label><br>
+                    <input type="email" ```html id="email" required><br>
+                    <label for="signupPassword">Password:</label><br>
+                    <input type="password" id="signupPassword" required><br>
+                    <label for="role">Role:</label><br>
+                    <input type="text" id="signuprole" required><br>
+                    <button type="submit">Signup</button><br>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Contract Farming System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/about.js"></script>
+</body>
+
+</html>
