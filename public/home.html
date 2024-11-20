@@ -14,8 +14,9 @@
         <div class="logo">FarmSure</div>
         <nav class="navbar">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="about.html" id="About">About us</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li id="userNav"></li> <!-- Placeholder for user navigation -->
                 <li><a href="#login" id="loginBtn">Login</a></li>
                 <li><a href="#signup" id="signupBtn">Signup</a></li>
             </ul>
@@ -49,7 +50,7 @@
                 <form><label for="loginEmail">Email:</label>
                     <input type="email" id="loginEmail" required>
                     <label for="role">Role:</label>
-                    <input type="text" id="role" required>
+                    <input type="text" id="loginrole" required>
                     <label for="loginPassword">Password:</label>
                     <input type="password" id="loginPassword" required>
                     <button type="submit">Login</button>
@@ -61,16 +62,16 @@
                 <span class="close">&times;</span>
                 <h2>Signup</h2>
                 <form>
-                    <label for="signupUsername">Username:</label>
+                    <label for="username">Username:</label>
                     <input type="text" id="username" required>
-                    <label for="signupName">Full Name:</label>
-                    <input type="text" id="FullName" required>
-                    <label for="signupEmail">Email:</label>
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" id="full_name" required>
+                    <label for="email">Email:</label>
                     <input type="email" ```html id="email" required>
-                    <label for="signupPassword">Password:</label>
-                    <input type="password" id="signupPassword" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
                     <label for="role">Role:</label>
-                    <input type="text" id="signuprole" required>
+                    <input type="text" id="role" required>
                     <button type="submit">Signup</button>
                 </form>
             </div>

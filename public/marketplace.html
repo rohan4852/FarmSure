@@ -42,7 +42,42 @@
                         </form>
                     </div>
                 </section>
-
+                <section id="add-contract" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Contract</h2>
+                        <form id="addContractForm">
+                            <label for="contractTitle">Contract Title:</label>
+                            <input type="text" id="contractTitle" name="contractTitle" required>
+                            <label for="contractDescription">Description:</label>
+                            <textarea id="contractDescription" name="contractDescription" required></textarea>
+                            <label for="contractDuration">Duration:</label>
+                            <input type="text" id="contractDuration" name="contractDuration" required>
+                            <label for="contractCrops">Crops:</label>
+                            <input type="text" id="contractCrops" name="contractCrops" required>
+                            <label for="contractFarmingMethod">Farming Method:</label>
+                            <input type="text" id="contractFarmingMethod" name="contractFarmingMethod" required>
+                            <label for="contractBuyer">Buyer:</label>
+                            <input type="text" id="contractBuyer" name="contractBuyer" required>
+                            <label for="contractPrice">Price:</label>
+                            <input type="number" id="contractPrice" name="contractPrice" required step="0.01">
+                            <label for="contractQuantity">Quantity:</label>
+                            <input type="text" id="contractQuantity" name="contractQuantity" required>
+                            <label for="contractQualityStandards">Quality Standards:</label>
+                            <textarea id="contractQualityStand ards" name="contractQualityStandards"
+                                required></textarea>
+                            <label for="contractDeliveryTimeline">Delivery Timeline:</label>
+                            <input type="text" id="contractDeliveryTimeline" name="contractDeliveryTimeline" required>
+                            <label for="contractAdditionalTerms">Additional Terms:</label>
+                            <textarea id="contractAdditionalTerms" name="contractAdditionalTerms"></textarea>
+                            <label for="contractPostedDate">Posted Date:</label>
+                            <input type="date" id="contractPostedDate" name="contractPostedDate" required>
+                            <label for="contractExpiryDate">Expiry Date:</label>
+                            <input type="date" id="contractExpiryDate" name="contractExpiryDate" required>
+                            <button type="submit">Submit Contract</button>
+                        </form>
+                    </div>
+                </section>
                 <section id="signup" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
@@ -69,6 +104,25 @@
                         <div id="contract-details-content"></div>
                     </div>
                 </section>
+                <!-- Modal for displaying contract details -->
+                <div id="contractDetailsModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 class="modal-title"></h2>
+                        <p class="modal-description"></p>
+                        <p class="modal-duration"></p>
+                        <p class="modal-crops"></p>
+                        <p class="modal-farming-method"></p>
+                        <p class="modal-buyer"></p>
+                        <p class="modal-price"></p>
+                        <p class="modal-quantity"></p>
+                        <p class="modal-quality-standards"></p>
+                        <p class="modal-delivery-timeline"></p>
+                        <p class="modal-additional-terms"></p>
+                        <p class="modal-posted-date"></p>
+                        <p class="modal-expiry-date"></p>
+                    </div>
+                </div>
     </main>
     <footer>
         <p>&copy; 2024 Contract Farming System. All rights reserved.</p>

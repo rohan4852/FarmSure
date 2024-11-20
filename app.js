@@ -1,5 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
+const bcrypt = require('bcrypt'); // For hashing passwords
+const bodyParser = require('body-parser'); // To parse request bodies
 const app = express();
 
 // MySQL Database connection
@@ -12,15 +14,18 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-        throw err;
+        console.error('MySQL Connection Error: ', err);
+        return;
     }
     console.log('MySQL Connected...');
 });
 
-// Serve static files from the "public" directory
+// Middleware
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Define routes
+// Serve static files from the "public" directory
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/home.html'); // Updated to new home page
 });
@@ -28,10 +33,60 @@ app.get('/', (req, res) => {
 app.get('/marketplace', (req, res) => {
     res.sendFile(__dirname + '/public/marketplace.html'); // New marketplace page
 });
+
 app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/public/about.html'); // New marketplace page
+    res.sendFile(__dirname + '/public/about.html'); // New about page
 });
 
+// Signup route
+app.post('/api/signup', (req, res) => {
+    const { username, fullName, email, password, role } = req.body;
+
+    // Validate input
+    if (!username || !fullName || !email || !password || !role) {
+        console.log('Signup Alert: All fields are required');
+        return res.redirect('/public/result.html?msg=All fields are required'); // Redirect on failure
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
+
+    const sql = 'INSERT INTO users (username, full_name, email, password, role) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [username, fullName, email, hashedPassword, role], (err, result) => {
+        if (err) {
+            console.log('Signup Alert: Signup unsuccessful');
+            console.error('Signup Error: ', err);
+            return res.redirect('/public/result.html?msg=Signup unsuccessful'); // Redirect on failure
+        }
+        console.log('Signup Alert: Signup successful');
+        res.redirect('/public/result.html?msg=Signup successful'); // Redirect on success
+    });
+});
+
+// Login route
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    db.query(sql, [email], (err, results) => {
+        if (err || results.length === 0) {
+            console.log('Login Alert: Login unsuccessful');
+            console.error('Login Error: ', err);
+            return res.redirect('/public/result.html?msg=Login unsuccessful'); // Redirect on failure
+        }
+
+        const user = results[0];
+        const passwordMatch = bcrypt.compareSync(password, user.password);
+
+        if (!passwordMatch) {
+            console.log('Login Alert: Login unsuccessful');
+            return res.redirect('/public/result.html?msg=Login unsuccessful'); // Redirect on failure
+        }
+
+        console.log('Login Alert: Login successful');
+        // Store user information in session or token (for this example, we'll just send a success message)
+        res.redirect('/public/result.html?msg=Login successful'); // Redirect on success
+    });
+});
 
 // Additional API endpoints for contract management
 app.post('/api/create-contract', (req, res) => {
@@ -40,7 +95,6 @@ app.post('/api/create-contract', (req, res) => {
 
 app.post('/api/secure-payment', (req, res) => {
     // Logic to process payment securely
-    // This could involve integrating with a payment gateway API
     res.json({ success: true, message: 'Payment processed successfully' });
 });
 

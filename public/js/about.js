@@ -43,3 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 })
+document.addEventListener('DOMContentLoaded', function () {
+    const userNav = document.getElementById('userNav');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+
+    // Simulate checking user session
+    const user = JSON.parse(localStorage.getItem('user')); // Assuming user info is stored in localStorage
+
+    if (user) {
+        // Hide login and signup buttons
+        loginBtn.style.display = 'none';
+        signupBtn.style.display = 'none';
+
+        // Show username
+        userNav.innerHTML = `<span>Welcome, ${user.username}</span>`;
+    }
+});
