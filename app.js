@@ -45,7 +45,7 @@ app.post('/api/signup', (req, res) => {
     // Validate input
     if (!username || !fullName || !email || !password || !role) {
         console.log('Signup Alert: All fields are required');
-        return res.redirect('/public/result.html?msg=All fields are required'); // Redirect on failure
+        return res.status(400).json({ message: 'All fields are required' }); // Return error response
     }
 
     const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
@@ -55,10 +55,10 @@ app.post('/api/signup', (req, res) => {
         if (err) {
             console.log('Signup Alert: Signup unsuccessful');
             console.error('Signup Error: ', err);
-            return res.redirect('/public/result.html?msg=Signup unsuccessful'); // Redirect on failure
+            return res.status(500).json({ message: 'Signup unsuccessful' }); // Return error response
         }
         console.log('Signup Alert: Signup successful');
-        res.redirect('/public/result.html?msg=Signup successful'); // Redirect on success
+        res.status(201).json({ message: 'Signup successful' }); // Return success response
     });
 });
 
