@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Open Signup Modal
     signupBtn.onclick = function () {
-        signupModal.style.display = "block";
+        signupModal.style.display = "block"; // Ensure this is correctly set
     }
 
     // Close Login Modal
@@ -37,26 +37,51 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+
+    // Handle Signup Form Submission
+    signupForm.onsubmit = function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const username = document.getElementById('username').value;
+        const fullName = document.getElementById('full_name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
+
+        // Send data to the API
+        fetch('/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                fullName,
+                email,
+                password,
+                role
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Signup failed');
+                }
+                return response.text(); // or response.json() if you return JSON from the server
+            })
+            .then(data => {
+                // Handle success (e.g., redirect to a result page)
+                window.location.href = '/public/result.html?msg=Signup successful';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error (e.g., show an error message)
+                window.location.href = '/public/result.html?msg=Signup unsuccessful';
+            });
+    };
+
+
     // Access Marketplace Button Functionality
     accessMarketplaceBtn.onclick = function () {
         window.location.href = 'marketplace.html'; // Redirect to marketplace
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const userNav = document.getElementById('userNav');
-    const loginBtn = document.getElementById('loginBtn');
-    const signupBtn = document.getElementById('signupBtn');
-
-    // Simulate checking user session
-    const user = JSON.parse(localStorage.getItem('user')); // Assuming user info is stored in localStorage
-
-    if (user) {
-        // Hide login and signup buttons
-        loginBtn.style.display = 'none';
-        signupBtn.style.display = 'none';
-
-        // Show username
-        userNav.innerHTML = `<span>Welcome, ${user.username}</span>`;
     }
 });
