@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeLogin = loginModal.querySelector('.close');
     const closeSignup = signupModal.querySelector('.close');
     const accessMarketplaceBtn = document.getElementById('accessMarketplaceBtn');
+    const signupForm = document.getElementById('signupForm'); // Reference the signup form
 
     // Open Login Modal
     loginBtn.onclick = function () {
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Open Signup Modal
     signupBtn.onclick = function () {
-        signupModal.style.display = "block"; // Ensure this is correctly set
+        signupModal.style.display = "block";
     }
 
     // Close Login Modal
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             signupModal.style.display = "none";
         }
     }
-
 
     // Handle Signup Form Submission
     signupForm.onsubmit = function (event) {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!response.ok) {
                     throw new Error('Signup failed');
                 }
-                return response.text(); // or response.json() if you return JSON from the server
+                return response.json(); // Assuming the response is JSON
             })
             .then(data => {
                 // Handle success (e.g., redirect to a result page)
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Handle error (e.g., show an error message)
-                window.location.href = '/public/result.html?msg=Signup unsuccessful';
+                // Display error message to the user
+                alert('Error: ' + error.message); // Show error message
+                // Optionally, you could redirect to an error page or show a modal with the error
             });
     };
 
-
     // Access Marketplace Button Functionality
     accessMarketplaceBtn.onclick = function () {
-        window.location.href = 'marketplace.html'; // Redirect to marketplace
+        window.location.href = '/public/marketplace.html';
     }
 });

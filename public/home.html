@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarmSure</title>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
@@ -62,7 +64,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Signup</h2>
-                <form>
+                <form id="signupForm">
                     <label for="username">Username:</label>
                     <input type="text" id="username" required>
                     <label for="full_name">Full Name:</label>
