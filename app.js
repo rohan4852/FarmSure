@@ -20,8 +20,20 @@ db.connect((err) => {
     console.log('MySQL Connected...');
 });
 
+// Middleware to set Content-Security-Policy header
+app.use((req, res, next) => {
+    const nonce = crypto.randomUUID(); // Generate a random nonce
+    res.setHeader("Content-Security-Policy", `
+        default-src 'self'; // Allow resources from the same origin
+        style-src 'self' https://fonts.googleapis.com; // Allow styles from Google Fonts
+        font-src 'self' https://fonts.gstatic.com; // Allow fonts from Google Fonts
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; // Allow inline scripts and scripts from jsdelivr
+    `);
+    next();
+});
+
 // Middleware
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); // This serves files from the public directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,6 +48,10 @@ app.get('/marketplace', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.sendFile(__dirname + '/public/about.html'); // New about page
+});
+
+app.get('/public/result.html', (req, res) => {
+    res.sendFile(__dirname + '/public/result.html');
 });
 
 // Signup route
