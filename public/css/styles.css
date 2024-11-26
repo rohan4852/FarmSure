@@ -335,3 +335,58 @@ background-color: rgba(0, 0, 0, 0.4);
     color: white;
     font-weight: bold;
 }
+
+/* user info */
+#user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Align to the right */
+}
+
+#username {
+    margin-right: 10px;
+    font-weight: bold;
+    color: white;
+    /* Change color to match your theme */
+}
+
+#logout-button {
+    background-color: #f44336;
+    /* Red color for logout */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#logout-button:hover {
+    background-color: #d32f2f;
+    /* Darker red on hover */
+}
+
+#authButtons a {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    /* Blue color for login/signup */
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#authButtons a:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+#userNav {
+    color: white;
+    /* Change color to match your theme */
+    font-weight: bold;
+    margin-right: 10px;
+    /* Add some spacing */
+}

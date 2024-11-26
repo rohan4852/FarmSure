@@ -19,15 +19,23 @@
                 <li><a href="home.html">Home</a></li>
                 <li><a href="about.html">About us</a></li>
                 <li id="userNav"></li> <!-- Placeholder for user navigation -->
-                <li><a href="#login" id="loginBtn">Login</a></li>
-                <li><a href="#signup" id="signupBtn">Signup</a></li>
+                <li id="authButtons">
+                    <a href="#login" id="loginBtn">Login</a>
+                    <a href="#signup" id="signupBtn">Signup</a>
+                </li>
             </ul>
         </nav>
     </header>
+
+    <!-- User Info Section -->
+    <div id="user-info" style="display: none;">
+        <span id="username"></span>
+        <button id="logout-button">Logout</button>
+    </div>
     <main>
         <section id="home">
-            <h1 style="text-align: center; font-size:xx-large">Welcome to FarmSure</h1>
-            <h2 style="text-align: center; font-size: larger;">Assured Contract Farming System</h2>
+            <h1>Welcome to FarmSure</h1>
+            <h2>Assured Contract Farming System</h2>
             <p>Connect with buyers, manage contracts, and ensure stable market access for your produce.</p>
             <button id="accessMarketplaceBtn">Access Marketplace</button>
         </section>
@@ -46,16 +54,17 @@
                 <p>Enjoy secure payment processing to ensure timely payments.</p>
             </div>
         </section>
-        <section id="login" class="modal">
+        <section id="loginform" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Login</h2>
-                <form><label for="loginEmail">Email:</label>
-                    <input type="email" id="loginEmail" required>
+                <form id="loginForm"> <!-- Add the id "loginForm" here -->
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
                     <label for="role">Role:</label>
-                    <input type="text" id="loginrole" required>
-                    <label for="loginPassword">Password:</label>
-                    <input type="password" id="loginPassword" required>
+                    <input type="text" id="role" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
                     <button type="submit">Login</button>
                 </form>
             </div>
@@ -70,11 +79,11 @@
                     <label for="full_name">Full Name:</label>
                     <input type="text" id="full_name" required>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="signupEmail" required>
                     <label for="password">Password:</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="signupPassword" required>
                     <label for="role">Role:</label>
-                    <input type="text" id="role" required>
+                    <input type="text" id="signupRole" required>
                     <button type="submit">Signup</button>
                 </form>
             </div>

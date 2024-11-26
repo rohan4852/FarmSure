@@ -144,3 +144,32 @@ document.addEventListener('DOMContentLoaded', function () {
         userNav.innerHTML = `<span>Welcome, ${user.username}</span>`;
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const userInfo = document.getElementById('user-info');
+    const authButtons = document.getElementById('authButtons');
+    const usernameDisplay = document.getElementById('username');
+    const logoutButton = document.getElementById('logout-button');
+
+    // Check user session
+    const user = JSON.parse(localStorage.getItem('user')); // Assuming user info is stored in localStorage
+
+    if (user) {
+        // User is logged in
+        usernameDisplay.innerText = user.username; // Display username
+        userInfo.style.display = 'flex'; // Show user info
+        authButtons.style.display = 'none'; // Hide login/signup buttons
+    } else {
+        // User is not logged in
+        userInfo.style.display = 'none'; // Hide user info
+        authButtons.style.display = 'block'; // Show login/signup buttons
+    }
+
+    // Logout functionality
+    logoutButton.addEventListener('click', function () {
+        // Clear user data from localStorage
+        localStorage.removeItem('user');
+        // Reload the page to reset the UI
+        location.reload();
+    });
+});

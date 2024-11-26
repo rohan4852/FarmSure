@@ -23,12 +23,7 @@ db.connect((err) => {
 // Middleware to set Content-Security-Policy header
 app.use((req, res, next) => {
     const nonce = crypto.randomUUID(); // Generate a random nonce
-    res.setHeader("Content-Security-Policy", `
-        default-src 'self'; // Allow resources from the same origin
-        style-src 'self' https://fonts.googleapis.com; // Allow styles from Google Fonts
-        font-src 'self' https://fonts.gstatic.com; // Allow fonts from Google Fonts
-        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; // Allow inline scripts and scripts from jsdelivr
-    `);
+    res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;");
     next();
 });
 
@@ -80,27 +75,23 @@ app.post('/api/signup', (req, res) => {
 
 // Login route
 app.post('/api/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, role, password } = req.body;
 
-    const sql = 'SELECT * FROM users WHERE email = ?';
-    db.query(sql, [email], (err, results) => {
+    const sql = 'SELECT * FROM users WHERE email = ? AND role = ?';
+    db.query(sql, [email, role], (err, results) => {
         if (err || results.length === 0) {
-            console.log('Login Alert: Login unsuccessful');
-            console.error('Login Error: ', err);
-            return res.redirect('/public/result.html?msg=Login unsuccessful'); // Redirect on failure
+            return res.status(401).json({ message: 'Invalid email, role, or password.' });
         }
 
         const user = results[0];
         const passwordMatch = bcrypt.compareSync(password, user.password);
 
         if (!passwordMatch) {
-            console.log('Login Alert: Login unsuccessful');
-            return res.redirect('/public/result.html?msg=Login unsuccessful'); // Redirect on failure
+            return res.status(401).json({ message: 'Invalid email, role, or password.' });
         }
 
         console.log('Login Alert: Login successful');
-        // Store user information in session or token (for this example, we'll just send a success message)
-        res.redirect('/public/result.html?msg=Login successful'); // Redirect on success
+        res.status(200).json({ message: 'Login successful', username: user.username });
     });
 });
 
