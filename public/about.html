@@ -16,6 +16,13 @@
             <ul>
                 <li><a href="home.html">Home</a></li>
                 <li><a href="marketplace.html">Marketplace</a></li>
+                <li id="userNav"></li>
+                <li>
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </li>
                 <li id="authButtons">
                     <a href="#login" id="loginBtn">Login</a>
                     <a href="#signup" id="signupBtn">Signup</a>
@@ -31,20 +38,20 @@
 
     <main>
         <section id="About" class="container mt-5">
-            <h2 class="text-center">About the Assured Contract Farming System</h2>
+            <h2 data-translate="aboutTitle1">About the Assured Contract Farming System</h2>
             <hr>
-            <p>
-                Welcome to the Contract Farming System, a revolutionary platform designed to connect farmers with
-                buyers, ensuring a seamless and efficient agricultural supply chain. Our mission is to empower farmers
-                by providing them with the tools and resources they need to thrive in today's competitive market.
-            </p>
-            <h3>What is Contract Farming?</h3>
-            <p>
+            <p data-translate="aboutContent">Welcome to the Contract Farming System, a revolutionary platform designed
+                to connect
+                farmers with buyers, ensuring a seamless and efficient agricultural supply chain. Our mission is to
+                empower farmers
+                by providing them with the tools and resources they need to thrive in today's competitive market.</p>
+            <h3 data-translate="abouth3">What is Contract Farming?</h3>
+            <p data-translate="aboutContent">
                 Contract farming is an agricultural production system where farmers and buyers enter into agreements
                 before the production season. This arrangement ensures that farmers have a guaranteed market for their
                 produce, while buyers can secure a reliable supply of quality products.
             </p>
-            <h3>Key Features of Our System</h3>
+            <h3 data-translate="abouth3">Key Features of Our System</h3>
             <ul>
                 <li>
                     <strong>Direct Connection:</strong> Our platform facilitates direct communication between farmers
@@ -117,6 +124,7 @@
         <p>&copy; 2024 Contract Farming System. All rights reserved.</p>
     </footer>
     <script src="js/about.js"></script>
+    <script src="js/language.js"></script>
 </body>
 
 </html>

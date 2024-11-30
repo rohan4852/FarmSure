@@ -19,6 +19,12 @@
                 <li><a href="home.html">Home</a></li>
                 <li><a href="about.html">About us</a></li>
                 <li id="userNav"></li> <!-- Placeholder for user navigation -->
+                <li>
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </li>
                 <li id="authButtons">
                     <a href="#login" id="loginBtn">Login</a>
                     <a href="#signup" id="signupBtn">Signup</a>
@@ -34,9 +40,10 @@
     </div>
     <main>
         <section id="home">
-            <h1>Welcome to FarmSure</h1>
-            <h2>Assured Contract Farming System</h2>
-            <p>Connect with buyers, manage contracts, and ensure stable market access for your produce.</p>
+            <h1 data-translate="welcome">Welcome to FarmSure</h1>
+            <h2 data-translate="aboutTitle">Assured Contract Farming System</h2>
+            <p data-translate="marketplaceDescription">Connect with buyers, manage contracts, and ensure stable market
+                access for your produce.</p>
             <button id="accessMarketplaceBtn">Access Marketplace</button>
         </section>
         <section id="features">
@@ -93,6 +100,7 @@
         <p>&copy; 2024 Contract Farming System. All rights reserved.</p>
     </footer>
     <script src="js/home.js"></script>
+    <script src="js/language.js"></script>
 </body>
 
 </html>

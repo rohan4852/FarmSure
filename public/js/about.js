@@ -62,8 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const userInfo = document.getElementById('user-info');
+    const userNav = document.getElementById('userNav');
     const authButtons = document.getElementById('authButtons');
+    const userInfo = document.getElementById('user-info');
     const usernameDisplay = document.getElementById('username');
     const logoutButton = document.getElementById('logout-button');
 
@@ -75,10 +76,12 @@ document.addEventListener('DOMContentLoaded', function () {
         usernameDisplay.innerText = user.username; // Display username
         userInfo.style.display = 'flex'; // Show user info
         authButtons.style.display = 'none'; // Hide login/signup buttons
+        userNav.innerHTML = `<span>Welcome, ${user.username}</span>`; // Display username in navbar
     } else {
         // User is not logged in
         userInfo.style.display = 'none'; // Hide user info
         authButtons.style.display = 'block'; // Show login/signup buttons
+        userNav.innerHTML = ''; // Clear userNav
     }
 
     // Logout functionality
