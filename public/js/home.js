@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const accessMarketplaceBtn = document.getElementById('accessMarketplaceBtn');
     const loginForm = loginModal.querySelector('form');
     const signupForm = signupModal.querySelector('form');
+    const modeToggle = document.getElementById('modeToggle');
+
+    // Check for saved user preference in local storage
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+        document.body.classList.add('dark-mode');
+        modeToggle.checked = true; // Set toggle to checked
+    }
 
     // Event Listeners
     loginBtn.addEventListener('click', () => toggleModal(loginModal, true));
@@ -18,6 +26,17 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('click', (event) => {
         if (event.target === loginModal) toggleModal(loginModal, false);
         if (event.target === signupModal) toggleModal(signupModal, false);
+    });
+
+    // Dark Mode Toggle
+    modeToggle.addEventListener('change', () => {
+        if (modeToggle.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+        }
     });
 
     // Login Form Submission
