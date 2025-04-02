@@ -27,8 +27,16 @@ header {
     font-weight: bold;
 }
 
-.navbar ul {
+.navbar {
+    display: flex;
+    /* Ensure navbar items are in a single row */
     list-style: none;
+    padding: 0;
+}
+
+.navbar ul {
+    display: flex;
+    /* Ensure navbar items are in a single row */
     padding: 0;
 }
 
