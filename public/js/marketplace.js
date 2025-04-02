@@ -8,6 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSignup = signupModal.querySelector('.close');
     const accessMarketplaceBtn = document.getElementById('accessMarketplaceBtn');
     const contractDetailsModal = document.getElementById('contractDetailsModal');
+    const modeToggle = document.getElementById('modeToggle');
+
+    // Check for saved user preference in local storage
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+        document.body.classList.add('dark-mode');
+        modeToggle.checked = true; // Set toggle to checked
+    }
+
+    // Dark Mode Toggle
+    modeToggle.addEventListener('change', () => {
+        if (modeToggle.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    });
 
     // Open Login Modal
     loginBtn.onclick = function () {
@@ -47,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'marketplace.html'; // Redirect to marketplace
     }
 });
+
 // Function to fetch and display contracts
 function fetchContracts() {
     const contracts = [

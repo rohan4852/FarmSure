@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupBtn = document.getElementById('signupBtn');
     const modals = document.querySelectorAll('.modal');
     const closeButtons = document.querySelectorAll('.close');
+    const modeToggle = document.getElementById('modeToggle');
+
+    // Check for saved user preference in local storage
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+        document.body.classList.add('dark-mode');
+        modeToggle.checked = true; // Set toggle to checked
+    }
 
     // Event listeners for opening modals
     loginBtn.addEventListener('click', () => openModal(modals[0]));
@@ -14,6 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners for closing modals
     closeButtons.forEach(button => {
         button.addEventListener('click', closeModals);
+    });
+
+    // Dark Mode Toggle
+    modeToggle.addEventListener('change', () => {
+        if (modeToggle.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+        }
     });
 
     // Close modal when clicking outside of it
@@ -42,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal(modal) {
         modal.style.display = "none";
     }
-})
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const userNav = document.getElementById('userNav');
     const loginBtn = document.getElementById('loginBtn');
