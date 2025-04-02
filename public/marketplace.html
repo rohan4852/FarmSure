@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarmSure - Marketplace</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
     <header>
         <div class="logo">FarmSure - Marketplace</div>
@@ -25,6 +25,10 @@
                 <li id="authButtons">
                     <a href="#login" id="loginBtn">Login</a>
                     <a href="#signup" id="signupBtn">Signup</a>
+                </li>
+                <li class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="modeToggle">
+                    <label class="form-check-label" for="modeToggle">Toggle Dark Mode</label>
                 </li>
             </ul>
         </nav>
@@ -81,8 +85,7 @@
                             <label for="contractQuantity">Quantity:</label>
                             <input type="text" id="contractQuantity" name="contractQuantity" required>
                             <label for="contractQualityStandards">Quality Standards:</label>
-                            <textarea id="contractQualityStand ards" name="contractQualityStandards"
-                                required></textarea>
+                            <textarea id="contractQualityStandards" name="contractQualityStandards" required></textarea>
                             <label for="contractDeliveryTimeline">Delivery Timeline:</label>
                             <input type="text" id="contractDeliveryTimeline" name="contractDeliveryTimeline" required>
                             <label for="contractAdditionalTerms">Additional Terms:</label>
@@ -105,7 +108,7 @@
                             <label for="signupName">Full Name:</label>
                             <input type="text" id="FullName" required>
                             <label for="signupEmail">Email:</label>
-                            <input type="email" ```html id="email" required>
+                            <input type="email" id="email" required>
                             <label for="signupPassword">Password:</label>
                             <input type="password" id="signupPassword" required>
                             <label for="role">Role:</label>
