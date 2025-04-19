@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginForm = loginModal.querySelector('form');
     const signupForm = signupModal.querySelector('form');
     const modeToggle = document.getElementById('modeToggle');
+    const logoutButton = document.getElementById('logout-button');
+    const userNav = document.getElementById('userNav');
+    const authButtons = document.getElementById('authButtons');
+    const userInfo = document.getElementById('user-info');
+    const usernameDisplay = document.getElementById('username');
 
     // Check for saved user preference in local storage
     const darkModePreference = localStorage.getItem('darkMode');
@@ -18,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modeToggle.checked = true; // Set toggle to checked
     }
 
-    // Event Listeners
+    // Event Listeners for modals
     loginBtn.addEventListener('click', () => toggleModal(loginModal, true));
     signupBtn.addEventListener('click', () => toggleModal(signupModal, true));
     closeLogin.addEventListener('click', () => toggleModal(loginModal, false));
@@ -42,94 +47,108 @@ document.addEventListener('DOMContentLoaded', function () {
     // Login Form Submission
     loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
+
         const email = document.getElementById('email').value;
         const role = document.getElementById('role').value;
         const password = document.getElementById('password').value;
 
-        authenticateUser('/api/login', { email, role, password });
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, role, password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Login successful') {
+                    alert('Login successful');
+                    document.getElementById('user-info').style.display = 'block';
+                    document.getElementById('username').textContent = data.username;
+                    toggleModal(loginModal, false);
+                    document.getElementById('authButtons').style.display = 'none';
+                    localStorage.setItem('username', data.username);
+                    // Update userNav
+                    userNav.innerHTML = `<span>Welcome, ${data.username}</span>`;
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(err => {
+                console.error('Login Error:', err);
+                alert('Login failed');
+            });
     });
 
     // Signup Form Submission
     signupForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        const username = document.getElementById('username').value;
-        const fullName = document.getElementById('full_name').value;
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        const role = document.getElementById('signupRole').value;
 
-        authenticateUser('/api/signup', { username, fullName, email, password, role });
-    });
+        console.log('Signup form submitted');
 
-    // Access Marketplace Button Functionality
-    accessMarketplaceBtn.addEventListener('click', function () {
-        window.location.href = '/marketplace.html';
-    });
+        const username = document.getElementById('username').value.trim();
+        const fullname = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value.trim();
+        const role = document.getElementById('signupRole').value.trim();
 
-    // Functions
-    function toggleModal(modal, isOpen) {
-        modal.style.display = isOpen ? 'block' : 'none';
-    }
+        // Client-side validation
+        if (!username || !fullname || !email || !password || !role) {
+            alert('Signup Alert: All fields are required');
+            return;
+        }
 
-    function authenticateUser(apiUrl, userData) {
-        fetch(apiUrl, {
+        console.log('Sending signup request', { username, fullname, email, password, role });
+
+        fetch('/api/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ username, fullname, email, password, role })
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Authentication failed , try with valid credentials');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                if (apiUrl === '/api/login') {
-                    alert('Login successful');
-                    localStorage.setItem('user', JSON.stringify({ username: data.username }));
-                    window.location.href = '/public/result.html?msg=Login successful';
+                console.log('Signup response', data);
+                if (data.message === 'Signup successful') {
+                    alert('Signup successful. Please login now.');
+                    toggleModal(signupModal, false);
                 } else {
-                    alert('Signup successful');
-                    toggleModal(signupModal, false); // Close the signup modal on success
+                    alert(data.message);
                 }
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error: ' + error.message);
+            .catch(err => {
+                console.error('Signup Error:', err);
+                alert('Signup failed');
             });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const userNav = document.getElementById('userNav');
-    const authButtons = document.getElementById('authButtons');
-    const userInfo = document.getElementById('user-info');
-    const usernameDisplay = document.getElementById('username');
-    const logoutButton = document.getElementById('logout-button');
-
-    // Check user session
-    const user = JSON.parse(localStorage.getItem('user')); // Assuming user info is stored in localStorage
-
-    if (user) {
-        // User is logged in
-        usernameDisplay.innerText = user.username; // Display username
-        userInfo.style.display = 'flex'; // Show user info
-        authButtons.style.display = 'none'; // Hide login/signup buttons
-        userNav.innerHTML = `<span>Welcome, ${user.username}</span>`; // Display username in navbar
-    } else {
-        // User is not logged in
-        userInfo.style.display = 'none'; // Hide user info
-        authButtons.style.display = 'block'; // Show login/signup buttons
-        userNav.innerHTML = ''; // Clear userNav
-    }
-
-    // Logout functionality
-    logoutButton.addEventListener('click', function () {
-        // Clear user data from localStorage
-        localStorage.removeItem('user');
-        // Reload the page to reset the UI
-        location.reload();
     });
+
+    // Access Marketplace Button
+    accessMarketplaceBtn.addEventListener('click', () => {
+        window.location.href = '/marketplace.html';
+    });
+
+    // Logout Button
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('user');
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('authButtons').style.display = 'block';
+        userNav.innerHTML = '';
+        alert('Logged out successfully');
+    });
+
+    // Auto login if user exists in localStorage
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+        document.getElementById('user-info').style.display = 'block';
+        document.getElementById('username').textContent = savedUsername;
+        document.getElementById('authButtons').style.display = 'none';
+        userNav.innerHTML = `<span>Welcome, ${savedUsername}</span>`;
+    }
+
+    // Toggle Modal Function
+    function toggleModal(modal, show) {
+        modal.style.display = show ? 'block' : 'none';
+    }
 });
