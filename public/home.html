@@ -2,108 +2,157 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FarmSure</title>
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 
 <body>
     <header>
-        <div class="logo">FarmSure</div>
-        <nav class="navbar">
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about.html">About us</a></li>
-                <li id="userNav"></li> <!-- Placeholder for user navigation -->
-                <li>
-                    <select id="languageSelect">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                    </select>
-                </li>
-                <li id="authButtons">
-                    <a href="#login" id="loginBtn">Login</a>
-                    <a href="#signup" id="signupBtn">Signup</a>
-                </li>
-                <li class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="modeToggle">
-                    <label class="form-check-label" for="modeToggle">
-                        Dark Mode</label>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+            <a class="navbar-brand font-weight-bold" href="#">FarmSure</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center">
+                    <li id="userNav" class="nav-item mr-3"></li>
+                    <li class="nav-item mr-3">
+                        <select id="languageSelect" class="form-control form-control-sm">
+                            <option value="en">English</option>
+                            <option value="hi">हिन्दी</option>
+                        </select>
+                    </li>
+                    <li id="authButtons" class="nav-item mr-3">
+                        <a href="#login" id="loginBtn" class="btn btn-outline-light btn-sm mr-2">Login</a>
+                        <a href="#signup" id="signupBtn" class="btn btn-outline-light btn-sm">Signup</a>
+                    </li>
+                    <li class="nav-item form-check form-switch text-white">
+                        <input class="form-check-input" type="checkbox" id="modeToggle" />
+                        <label class="form-check-label" for="modeToggle">Dark Mode</label>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <!-- User Info Section -->
-    <div id="user-info" style="display: none;">
-        <span id="username"></span>
-        <button id="logout-button">Logout</button>
+    <div id="user-info" class="d-none p-3 bg-light text-dark rounded shadow fixed-top"
+        style="top: 56px; right: 20px; z-index: 1050;">
+        <span id="username" class="font-weight-bold"></span>
+        <button id="logout-button" class="btn btn-sm btn-outline-secondary ml-3">Logout</button>
     </div>
-    <main>
-        <section id="home">
-            <h1 data-translate="welcome">Welcome to FarmSure</h1>
-            <h2 data-translate="aboutTitle">Assured Contract Farming System</h2>
-            <p data-translate="marketplaceDescription">Connect with buyers, manage contracts, and ensure stable market
-                access for your produce.</p>
-            <button id="accessMarketplaceBtn">Access Marketplace</button>
+
+    <main class="container mt-5 pt-5">
+        <section id="home" class="text-center mb-5">
+            <h1 data-translate="welcome" class="display-4 font-weight-bold">Welcome to FarmSure</h1>
+            <h2 data-translate="aboutTitle" class="h4 text-muted mb-3">Assured Contract Farming System</h2>
+            <p data-translate="marketplaceDescription" class="lead mb-4">
+                Connect with buyers, manage contracts, and ensure stable market access for your produce.
+            </p>
+            <button id="accessMarketplaceBtn" class="btn btn-primary btn-lg">Access Marketplace</button>
         </section>
-        <section id="features">
-            <h2>Marketplace Features</h2>
-            <div class="feature">
-                <h3>Contract Management</h3>
-                <p>Manage your contracts easily with our user-friendly tools.</p>
-            </div>
-            <div class="feature">
-                <h3>Price Negotiation</h3>
-                <p>Negotiate prices directly with buyers for fair transactions.</p>
-            </div>
-            <div class="feature">
-                <h3>Secure Payments</h3>
-                <p>Enjoy secure payment processing to ensure timely payments.</p>
+
+        <section id="features" class="bg-light p-4 rounded shadow">
+            <h2 class="mb-4">Marketplace Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="feature p-3 border rounded h-100">
+                        <h3>Contract Management</h3>
+                        <p>Manage your contracts easily with our user-friendly tools.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="feature p-3 border rounded h-100">
+                        <h3>Price Negotiation</h3>
+                        <p>Negotiate prices directly with buyers for fair transactions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="feature p-3 border rounded h-100">
+                        <h3>Secure Payments</h3>
+                        <p>Enjoy secure payment processing to ensure timely payments.</p>
+                    </div>
+                </div>
             </div>
         </section>
-        <section id="loginform" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Login</h2>
-                <form id="loginForm"> <!-- Add the id "loginForm" here -->
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                    <label for="role">Role:</label>
-                    <input type="text" id="role" required>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" required>
-                    <button type="submit">Login</button>
+
+        <!-- Login Modal -->
+        <section id="loginform" class="modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-content rounded shadow p-4 mx-auto" style="max-width: 400px;">
+                <button type="button" class="close" aria-label="Close">&times;</button>
+                <h2 id="loginModalLabel" class="mb-4">Login</h2>
+                <form id="loginForm" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <input type="text" id="role" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </form>
             </div>
         </section>
-        <section id="signup" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Signup</h2>
-                <form id="signupForm">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" id="fullname" name="fullName" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="signupEmail" name="email" required>
-                    <label for="password">Password:</label>
-                    <input type="password" id="signupPassword" name="password" required>
-                    <label for="role">Role:</label>
-                    <input type="text" id="signupRole" name="role" required>
-                    <button type="submit">Signup</button>
+
+        <!-- Signup Modal -->
+        <section id="signup" class="modal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+            aria-hidden="true">
+            <div class="modal-content rounded shadow p-4 mx-auto" style="max-width: 400px;">
+                <button type="button" class="close" aria-label="Close">&times;</button>
+                <h2 id="signupModalLabel" class="mb-4">Signup</h2>
+                <form id="signupForm" novalidate>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" id="fullname" name="fullName" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email:</label>
+                        <input type="email" id="signupEmail" name="email" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password:</label>
+                        <input type="password" id="signupPassword" name="password" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="signupRole">Role:</label>
+                        <input type="text" id="signupRole" name="role" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Signup</button>
                 </form>
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2025 Contract Farming System. All rights reserved.</p>
+
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <p class="mb-0">&copy; 2025 Contract Farming System. All rights reserved.</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/home.js"></script>
     <script src="js/language.js"></script>
 </body>
