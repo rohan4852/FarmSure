@@ -16,7 +16,14 @@
             <ul>
                 <li><a href="home.html">Home</a></li>
                 <li><a href="about.html" id="About">About us</a></li>
-                <li id="userNav"></li>
+                <li id="userNav">
+                    <div class="user-dropdown" style="display: none;">
+                        <span class="username-display">Welcome, <span id="username-text"></span></span>
+                        <div class="user-dropdown-content">
+                            <a href="#" id="logout-link">Logout</a>
+                        </div>
+                    </div>
+                </li>
                 <li>
                     <select id="languageSelect">
                         <option value="en">English</option>
@@ -49,21 +56,63 @@
                 <section>
                     <div id="contracts-container">
                 </section>
-                <section id="login" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Login</h2>
-                        <form>
-                            <label for="loginEmail">Email:</label>
-                            <input type="email" id="loginEmail" required>
-                            <label for="role">Role:</label>
-                            <input type="text" id="role" required>
-                            <label for="loginPassword">Password:</label>
-                            <input type="password" id="loginPassword" required>
-                            <button type="submit">Login</button>
+                <!-- Login Modal -->
+                <section id="loginform" class="modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-content rounded shadow p-4 mx-auto" style="max-width: 400px;">
+                        <button type="button" class="close" aria-label="Close">&times;</button>
+                        <h2 id="loginModalLabel" class="mb-4">Login</h2>
+                        <form id="loginForm" novalidate>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role:</label>
+                                <input type="text" id="role" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </form>
                     </div>
                 </section>
+
+                <!-- Signup Modal -->
+                <section id="signup" class="modal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-content rounded shadow p-4 mx-auto" style="max-width: 400px;">
+                        <button type="button" class="close" aria-label="Close">&times;</button>
+                        <h2 id="signupModalLabel" class="mb-4">Signup</h2>
+                        <form id="signupForm" novalidate>
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" id="fullName" name="fullName" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupEmail">Email:</label>
+                                <input type="email" id="signupEmail" name="email" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword">Password:</label>
+                                <input type="password" id="signupPassword" name="password" class="form-control"
+                                    required />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupRole">Role:</label>
+                                <input type="text" id="signupRole" name="role" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Signup</button>
+                        </form>
+                    </div>
+                </section>
+
                 <section id="add-contract" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
@@ -96,25 +145,6 @@
                             <label for="contractExpiryDate">Expiry Date:</label>
                             <input type="date" id="contractExpiryDate" name="contractExpiryDate" required>
                             <button type="submit">Submit Contract</button>
-                        </form>
-                    </div>
-                </section>
-                <section id="signup" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Signup</h2>
-                        <form>
-                            <label for="signupUsername">Username:</label>
-                            <input type="text" id="username" required>
-                            <label for="signupName">Full Name:</label>
-                            <input type="text" id="FullName" required>
-                            <label for="signupEmail">Email:</label>
-                            <input type="email" id="email" required>
-                            <label for="signupPassword">Password:</label>
-                            <input type="password" id="signupPassword" required>
-                            <label for="role">Role:</label>
-                            <input type="text" id="signuprole" required>
-                            <button type="submit">Signup</button>
                         </form>
                     </div>
                 </section>

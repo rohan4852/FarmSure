@@ -50,13 +50,29 @@ app.get('/public/result.html', (req, res) => {
 });
 
 // Signup route
+// Signup route with improved error handling
 app.post('/api/signup', (req, res) => {
     const { username, fullName, email, password, role } = req.body;
 
+    // Log received data
+    console.log('Signup request received:', {
+        username,
+        fullName,
+        email,
+        role,
+        passwordReceived: password ? 'Yes' : 'No'
+    });
+
     // Validate input
     if (!username || !fullName || !email || !password || !role) {
-        console.log('Signup Alert: All fields are required');
-        return res.status(400).json({ message: 'All fields are required' }); // Return error response
+        console.log('Signup Alert: Missing fields', {
+            username: !!username,
+            fullName: !!fullName,
+            email: !!email,
+            password: !!password,
+            role: !!role
+        });
+        return res.status(400).json({ message: 'All fields are required' });
     }
 
     const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
@@ -64,15 +80,14 @@ app.post('/api/signup', (req, res) => {
     const sql = 'INSERT INTO users (username, full_name, email, password, role) VALUES (?, ?, ?, ?, ?)';
     db.query(sql, [username, fullName, email, hashedPassword, role], (err, result) => {
         if (err) {
-            console.log('Signup Alert: Signup unsuccessful');
-            console.error('Signup Error: ', err);
-            return res.status(500).json({ message: 'Signup unsuccessful' }); // Return error response
+            console.log('Signup Alert: Database error');
+            console.error('Signup Error:', err);
+            return res.status(500).json({ message: 'Signup unsuccessful', error: err.message });
         }
         console.log('Signup Alert: Signup successful');
-        res.status(201).json({ message: 'Signup successful' }); // Return success response
+        res.status(201).json({ message: 'Signup successful' });
     });
 });
-
 // Login route
 app.post('/api/login', (req, res) => {
     const { email, role, password } = req.body;

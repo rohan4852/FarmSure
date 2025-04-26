@@ -1,5 +1,3 @@
-// about.js
-
 // Modal script
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
@@ -7,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modals = document.querySelectorAll('.modal');
     const closeButtons = document.querySelectorAll('.close');
     const modeToggle = document.getElementById('modeToggle');
+    const userDropdown = document.querySelector('#userNav .user-dropdown');
+    const authButtons = document.getElementById('authButtons');
+    const usernameText = document.getElementById('username-text');
+    const logoutLink = document.getElementById('logout-link');
 
     // Check for saved user preference in local storage
     const darkModePreference = localStorage.getItem('darkMode');
@@ -14,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
         modeToggle.checked = true; // Set toggle to checked
     }
+
+    // Update auth UI based on login status
+    updateAuthUI();
+
+    // Setup logout functionality
+    setupLogout();
 
     // Event listeners for opening modals
     loginBtn.addEventListener('click', () => openModal(modals[0]));
@@ -112,3 +120,84 @@ document.addEventListener('DOMContentLoaded', function () {
         location.reload();
     });
 });
+
+// Standard user authentication code to be used across all JS files
+
+// Function to check if user is logged in and update UI accordingly
+function checkUserLogin() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userNav = document.getElementById('userNav');
+    const authButtons = document.getElementById('authButtons');
+    const userInfo = document.getElementById('user-info');
+    const usernameDisplay = document.getElementById('username');
+
+    if (user) {
+        // User is logged in
+        if (usernameDisplay) usernameDisplay.innerText = user.username;
+        if (userInfo) userInfo.style.display = 'block';
+        if (authButtons) authButtons.style.display = 'none';
+        if (userNav) userNav.innerHTML = `<span>Welcome, ${user.username}</span>`;
+    } else {
+        // User is not logged in
+        if (userInfo) userInfo.style.display = 'none';
+        if (authButtons) authButtons.style.display = 'block';
+        if (userNav) userNav.innerHTML = '';
+    }
+
+    // Attach logout functionality
+    const logoutButton = document.getElementById('logout-button');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function () {
+            localStorage.removeItem('user');
+            alert('Logged out successfully');
+            location.reload();
+        });
+    }
+}
+
+// Call this function when DOM is loaded
+document.addEventListener('DOMContentLoaded', checkUserLogin);
+
+function updateAuthUI() {
+    const userDropdown = document.querySelector('#userNav .user-dropdown');
+    const authButtons = document.getElementById('authButtons');
+    const usernameText = document.getElementById('username-text');
+
+    // Check if user is logged in
+    const user = localStorage.getItem('username');
+
+    if (user) {
+        // User is logged in
+        userDropdown.style.display = 'block';
+        usernameText.textContent = user;
+        authButtons.style.display = 'none';
+    } else {
+        // User is not logged in
+        userDropdown.style.display = 'none';
+        authButtons.style.display = 'block';
+    }
+}
+
+// Handle logout functionality
+function setupLogout() {
+    const logoutLink = document.getElementById('logout-link');
+
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Clear user data from localStorage
+            localStorage.removeItem('username');
+            localStorage.removeItem('user');
+
+            // Show success message
+            alert('Logged out successfully');
+
+            // Reload page to update UI
+            location.reload();
+        });
+    }
+}
+
+// Call this function when DOM is loaded
+document.addEventListener('DOMContentLoaded', checkUserLogin);
