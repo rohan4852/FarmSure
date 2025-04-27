@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const authButtons = document.getElementById('authButtons');
     const userInfo = document.getElementById('user-info');
     const usernameDisplay = document.getElementById('username');
+    const logoutButton = document.getElementById('logout-button');
+
 
     // Check for saved user preference in local storage
     const darkModePreference = localStorage.getItem('darkMode');
@@ -27,6 +29,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Setup logout functionality
     setupLogout();
+
+    // Add toggle for user dropdown content visibility
+    const userDropdown = document.querySelector('#userNav .user-dropdown');
+    if (userDropdown) {
+        userDropdown.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const dropdownContent = this.querySelector('.user-dropdown-content');
+            if (dropdownContent) {
+                if (dropdownContent.style.display === 'block') {
+                    dropdownContent.style.display = 'none';
+                } else {
+                    dropdownContent.style.display = 'block';
+                }
+            }
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function () {
+            const dropdownContent = userDropdown.querySelector('.user-dropdown-content');
+            if (dropdownContent) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+    }
 
     // Event Listeners for modals
     loginBtn.addEventListener('click', () => toggleModal(loginModal, true));
@@ -205,23 +231,28 @@ document.addEventListener('DOMContentLoaded', checkUserLogin);
 
 // Function to update UI when user is logged in
 function updateUserUI(username) {
-    // Create user dropdown in navbar
-    userNav.innerHTML = `
-            <div class="user-dropdown">
-                <span class="welcome-text">Welcome, ${username}</span>
-                <div class="user-dropdown-content">
-                    <a href="#" id="profile-link">Profile</a>
-                    <a href="#" id="logout-link">Logout</a>
-                </div>
-            </div>
-        `;
+    // Update existing user dropdown elements instead of replacing innerHTML
+    const userDropdown = document.querySelector('#userNav .user-dropdown');
+    const usernameText = document.getElementById('username-text');
 
-    // Add logout functionality
-    document.getElementById('logout-link').addEventListener('click', logoutUser);
+    if (userDropdown && usernameText) {
+        usernameText.textContent = username;
+        userDropdown.style.display = 'block';
+    }
 
     // Hide login/signup buttons
-    authButtons.style.display = 'none';
+    if (authButtons) {
+        authButtons.style.display = 'none';
+    }
 
+    // Attach logout functionality to existing logout link
+    const logoutLink = document.getElementById('logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            logoutUser();
+        });
+    }
 }
 
 // Logout functionality

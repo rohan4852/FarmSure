@@ -13,46 +13,36 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
-            <a class="navbar-brand font-weight-bold" href="#">FarmSure</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About us</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav align-items-center">
-                    <li id="userNav">
-                        <div class="user-dropdown" style="display: none;">
-                            <span class="username-display">Welcome, <span id="username-text"></span></span>
-                            <div class="user-dropdown-content">
-                                <a href="#" id="logout-link">Logout</a>
-                            </div>
+        <div class="logo">FarmSure</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li id="userNav">
+                    <div class="user-dropdown" style="display: none;">
+                        <span class="username-display">Welcome, <span id="username-text"></span></span>
+                        <div class="user-dropdown-content">
+                            <a href="#" id="logout-link">Logout</a>
                         </div>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <select id="languageSelect" class="form-control form-control-sm">
-                            <option value="en">English</option>
-                            <option value="hi">हिन्दी</option>
-                        </select>
-                    </li>
-                    <li id="authButtons" class="nav-item mr-3">
-                        <a href="#login" id="loginBtn" class="btn btn-outline-light btn-sm mr-2">Login</a>
-                        <a href="#signup" id="signupBtn" class="btn btn-outline-light btn-sm">Signup</a>
-                    </li>
-                    <li class="nav-item form-check form-switch text-white">
-                        <input class="form-check-input" type="checkbox" id="modeToggle" />
-                        <label class="form-check-label" for="modeToggle">Dark Mode</label>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+
+
+                <li>
+                    <select id="languageSelect" class="form-control form-control-sm">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </li>
+                <li id="authButtons">
+                    <a href="#login" id="loginBtn" class="btn btn-outline-light btn-sm mr-2">Login</a>
+                    <a href="#signup" id="signupBtn" class="btn btn-outline-light btn-sm">Signup</a>
+                </li>
+                <li class="form-check form-switch text-white">
+                    <input class="form-check-input" type="checkbox" id="modeToggle" />
+                    <label class="form-check-label" for="modeToggle">Dark Mode</label>
+                </li>
+            </ul>
         </nav>
     </header>
 
