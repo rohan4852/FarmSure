@@ -66,11 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Dark Mode Toggle
     modeToggle.addEventListener('change', () => {
+        const modalContents = document.querySelectorAll('.modal-content');
         if (modeToggle.checked) {
             document.body.classList.add('dark-mode');
+            modalContents.forEach(modal => modal.classList.add('dark-mode'));
             localStorage.setItem('darkMode', 'enabled');
         } else {
             document.body.classList.remove('dark-mode');
+            modalContents.forEach(modal => modal.classList.remove('dark-mode'));
             localStorage.setItem('darkMode', 'disabled');
         }
     });
